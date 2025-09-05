@@ -5,7 +5,12 @@ import { load } from 'cheerio';
 
 
 const PROFILE_URL = 'https://learn.microsoft.com/en-us/users/sean-steefel/achievements';
-
+(async () => {
+  const url = 'https://learn.microsoft.com/en-us/users/sean-steefel/achievements?tab=tab-modules';
+  const html = await axios.get(url).then(r => r.data);
+  console.log(html.slice(0, 2_000));  // dump first 2k chars
+  process.exit(0);
+})();
 async function fetchHTML(url) {
   const res = await axios.get(url, { headers: { 'User-Agent': 'GitHub-Action' } });
   return res.data;
