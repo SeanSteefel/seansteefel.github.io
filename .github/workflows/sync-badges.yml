@@ -1,6 +1,11 @@
+name: Sync Microsoft Learn Badges
+
+on:
+  schedule:
+    - cron: '0 3 * * *'
+  workflow_dispatch:
 permissions:
   contents: write
-
 jobs:
   scrape:
     runs-on: ubuntu-latest
