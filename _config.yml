@@ -1,0 +1,10 @@
+title: "Sean Steefel — Azure Architecture, Automation & DevOps"
+description: "Azure architecture, automation, DevOps workflows, and achievement tracking"
+theme: jekyll-theme-slate
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-mentions
+  - jekyll-archives
+  - jekyll-paginate
