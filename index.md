@@ -12,7 +12,7 @@ This site is my public space to showcase technical milestones, certifications, a
 
 ## 🏆 Certifications & Badges
 
-<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+<div class="badge-grid" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
   <img src="https://learn.microsoft.com/training/achievements/understand-microsoft-entra-id.svg" alt="Understand Microsoft Entra ID" width="100">
   <img src="https://learn.microsoft.com/training/achievements/introduction-to-powershell.svg" alt="Introduction to PowerShell" width="100">
   <img src="https://learn.microsoft.com/training/achievements/introduction-to-bash.svg" alt="Introduction to Bash" width="100">
@@ -46,6 +46,7 @@ This site is my public space to showcase technical milestones, certifications, a
   <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-devops.svg" alt="Introduction to Azure DevOps" width="100">
   <img src="https://learn.microsoft.com/training/achievements/assess-software-development-process.svg" alt="Assess your existing software development process" width="100">
 </div>
+
 
 ---
 
