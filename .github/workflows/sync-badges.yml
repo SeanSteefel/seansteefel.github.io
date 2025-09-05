@@ -24,6 +24,8 @@ jobs:
 
       - name: Install dependencies
         run: npm install --no-audit --prefer-offline
+      - name: Install Playwright browsers
+        run: npx playwright install --with-deps
 
       - name: Scrape badges with Playwright
         run: node scripts/sync-badges.js
