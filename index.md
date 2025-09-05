@@ -12,21 +12,21 @@ This site is my public space to showcase technical milestones, certifications, a
 
 ## 🏆 Certifications & Badges
 
-<div class="badge-grid" style="display:flex;flex-wrap:wrap;gap:10px;align-items:center;">
-  <img src="https://learn.microsoft.com/training/achievements/understand-microsoft-entra-id.svg" alt="Understand Microsoft Entra ID" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/introduction-to-powershell.svg" alt="Introduction to PowerShell" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/introduction-to-bash.svg" alt="Introduction to Bash" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-cloud-shell.svg" alt="Introduction to Azure Cloud Shell" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/monitor-hybrid-multicloud-machines-azure-arc.svg" alt="Monitor hybrid and multicloud machines through Azure Arc" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/plan-deploy-azure-arc-servers.svg" alt="Plan and deploy Azure Arc-enabled servers at scale" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-arc-servers.svg" alt="Introduction to Azure Arc-enabled servers" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-arc.svg" alt="Introduction to Azure Arc" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/configure-azure-policy.svg" alt="Configure Azure Policy" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/configure-subscriptions.svg" alt="Configure subscriptions" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/configure-user-group-accounts.svg" alt="Configure user and group accounts" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/design-azure-compute-solution.svg" alt="Design an Azure compute solution" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-well-architected-framework.svg" alt="Introduction to the Microsoft Azure Well-Architected Framework" width="100">
-  <img src="https://learn.microsoft.com/training/achievements/configure-azure-active-directory.svg" alt="Configure Azure Active Directory" width="100">
+<div class="badge-grid">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/azure-active-directory-explore.svg" alt="Understand Microsoft Entra ID" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/powershell/introduction-to-powershell.svg" alt="Introduction to PowerShell" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/student-evangelism/bash-introduction-badge.svg" alt="Introduction to Bash" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/introduction-to-azure-cloud-shell.svg" alt="Introduction to Azure Cloud Shell" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/monitor-azure-arc-enabled-servers.svg" alt="Monitor hybrid and multicloud machines through Azure Arc" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/plan-deploy-azure-arc-enabled-servers.svg" alt="Plan and deploy Azure Arc-enabled servers at scale" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/intro-to-arc-for-servers.svg" alt="Introduction to Azure Arc-enabled servers" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/intro-to-azure-arc.svg" alt="Introduction to Azure Arc" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/azure-policy-configure.svg" alt="Configure Azure Policy" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/subscriptions-configure.svg" alt="Configure subscriptions" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/user-group-accounts-configure.svg" alt="Configure user and group accounts" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/design-compute-solution.svg" alt="Design an Azure compute solution" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/azure-well-architected-introduction.svg" alt="Introduction to the Microsoft Azure Well-Architected Framework" width="100">
+  <img src="https://learn.microsoft.com/en-us/training/achievements/azure-active-directory.svg" alt="Configure Azure Active Directory" width="100">
   <img src="https://learn.microsoft.com/training/achievements/design-governance.svg" alt="Design governance" width="100">
   <img src="https://learn.microsoft.com/training/achievements/deploy-azure-infrastructure-json-arm.svg" alt="Deploy Azure infrastructure by using JSON ARM templates" width="100">
   <img src="https://learn.microsoft.com/training/achievements/control-azure-services-cli.svg" alt="Control Azure services with the CLI" width="100">
