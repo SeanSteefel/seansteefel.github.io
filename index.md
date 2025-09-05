@@ -1,79 +1,72 @@
-## 🏅 Microsoft Learn Achievements
+---
+title: "Sean Steefel — Azure Automation & DevOps"
+layout: default
+---
 
-**Level:** 8  
-**XP:** 50,300 / 72,099  
-**Trophies:** 🏆🏆🏆  
+# 👋 Welcome to My Portfolio
+
+I’m **Sean Steefel**, a persistent, detail‑oriented problem solver passionate about **Azure automation**, **DevOps workflows**, and **creative achievement tracking**.  
+This site is my public space to showcase technical milestones, certifications, and projects.
 
 ---
 
-### 🔐 Identity & Access
+## 🏆 Certifications & Badges
 
-[![Understand Microsoft Entra ID](https://img.shields.io/badge/Entra%20ID-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/entra-id-overview/) – *Completed: Aug 4, 2024*  
-[![Configure Azure Active Directory](https://img.shields.io/badge/Azure%20AD-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/azure-active-directory/) – *Completed: Jan 20, 2023*  
-[![Configure user and group accounts](https://img.shields.io/badge/User%20Accounts-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/manage-users-groups/) – *Completed: Apr 14, 2023*
-
----
-
-### 🖥️ Shell & Scripting
-
-[![Introduction to PowerShell](https://img.shields.io/badge/PowerShell-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/introduction-to-powershell/) – *Completed: Aug 4, 2024*  
-[![Introduction to Bash](https://img.shields.io/badge/Bash-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/introduction-to-bash/) – *Completed: Aug 4, 2024*  
-[![Azure Cloud Shell](https://img.shields.io/badge/Cloud%20Shell-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/introduction-to-azure-cloud-shell/) – *Completed: Aug 4, 2024*  
-[![Automate Azure tasks with PowerShell](https://img.shields.io/badge/Automation-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/automate-azure-with-powershell/) – *Completed: Jan 10, 2022*
-
----
-
-### 🌐 Azure Arc
-
-[![Monitor with Azure Arc](https://img.shields.io/badge/Azure%20Arc%20Monitoring-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/monitor-arc-enabled-servers/) – *Completed: Jan 29, 2024*  
-[![Deploy Azure Arc at scale](https://img.shields.io/badge/Azure%20Arc%20Deployment-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/deploy-arc-enabled-servers/) – *Completed: Jan 29, 2024*  
-[![Intro to Azure Arc](https://img.shields.io/badge/Azure%20Arc%20Intro-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/intro-to-azure-arc/) – *Completed: Jan 11, 2024*
-
----
-
-### 🛡️ Governance & Policy
-
-[![Configure Azure Policy](https://img.shields.io/badge/Azure%20Policy-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/configure-azure-policy/) – *Completed: Jul 19, 2023*  
-[![Configure subscriptions](https://img.shields.io/badge/Subscriptions-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/configure-subscriptions/) – *Completed: Jul 19, 2023*  
-[![Design governance](https://img.shields.io/badge/Governance-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/design-governance/) – *Completed: Dec 4, 2022*
-
----
-
-### 🧱 Infrastructure & Templates
-
-[![Deploy with ARM JSON](https://img.shields.io/badge/ARM%20Templates-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/deploy-infrastructure-arm-templates/) – *Completed: Jan 11, 2022*  
-[![Configure with Resource Manager](https://img.shields.io/badge/Resource%20Manager-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/configure-resources-arm/) – *Completed: Jan 6, 2022*
-
----
-
-### ⚙️ CLI & APIs
-
-[![Control Azure with CLI](https://img.shields.io/badge/Azure%20CLI-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/control-azure-cli/) – *Completed: Jan 10, 2022*  
-[![Call API from Logic Apps](https://img.shields.io/badge/Logic%20Apps%20API-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/call-api-logic-apps/) – *Completed: Sep 7, 2019*
+<div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+  <img src="https://learn.microsoft.com/training/achievements/understand-microsoft-entra-id.svg" alt="Understand Microsoft Entra ID" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/introduction-to-powershell.svg" alt="Introduction to PowerShell" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/introduction-to-bash.svg" alt="Introduction to Bash" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-cloud-shell.svg" alt="Introduction to Azure Cloud Shell" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/monitor-hybrid-multicloud-machines-azure-arc.svg" alt="Monitor hybrid and multicloud machines through Azure Arc" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/plan-deploy-azure-arc-servers.svg" alt="Plan and deploy Azure Arc-enabled servers at scale" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-arc-servers.svg" alt="Introduction to Azure Arc-enabled servers" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-arc.svg" alt="Introduction to Azure Arc" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/configure-azure-policy.svg" alt="Configure Azure Policy" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/configure-subscriptions.svg" alt="Configure subscriptions" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/configure-user-group-accounts.svg" alt="Configure user and group accounts" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/design-azure-compute-solution.svg" alt="Design an Azure compute solution" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-well-architected-framework.svg" alt="Introduction to the Microsoft Azure Well-Architected Framework" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/configure-azure-active-directory.svg" alt="Configure Azure Active Directory" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/design-governance.svg" alt="Design governance" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/deploy-azure-infrastructure-json-arm.svg" alt="Deploy Azure infrastructure by using JSON ARM templates" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/control-azure-services-cli.svg" alt="Control Azure services with the CLI" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/automate-azure-tasks-powershell.svg" alt="Automate Azure tasks using scripts with PowerShell" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/configure-resources-arm-templates.svg" alt="Configure resources with Azure Resource Manager templates" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/use-azure-resource-manager.svg" alt="Use Azure Resource Manager" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/configure-azure-resources-tools.svg" alt="Configure Azure resources with tools" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/call-api-logic-apps-custom-connector.svg" alt="Call an API from an Azure Logic Apps workflow using a custom connector" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/route-process-data-logic-apps.svg" alt="Route and process data automatically using Azure Logic Apps" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-logic-apps.svg" alt="Introduction to Azure Logic Apps" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/host-build-agent-azure-pipelines.svg" alt="Host your own build agent in Azure Pipelines" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/manage-build-dependencies-azure-artifacts.svg" alt="Manage build dependencies with Azure Artifacts" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/run-quality-tests-azure-pipelines.svg" alt="Run quality tests in your build pipeline by using Azure Pipelines" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/implement-code-workflow-git-github.svg" alt="Implement a code workflow in your build pipeline by using Git and GitHub" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/create-build-pipeline-azure-pipelines.svg" alt="Create a build pipeline with Azure Pipelines" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/choose-agile-approach.svg" alt="Choose an Agile approach to software development" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/introduction-to-azure-devops.svg" alt="Introduction to Azure DevOps" width="100">
+  <img src="https://learn.microsoft.com/training/achievements/assess-software-development-process.svg" alt="Assess your existing software development process" width="100">
+</div>
 
 ---
 
-### 🔄 Logic Apps
+## 📊 Achievement Timeline
 
-[![Route data with Logic Apps](https://img.shields.io/badge/Logic%20Apps%20Routing-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/route-process-data-logic-apps/) – *Completed: Sep 6, 2019*  
-[![Intro to Logic Apps](https://img.shields.io/badge/Logic%20Apps%20Intro-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/introduction-logic-apps/) – *Completed: Aug 25, 2019*
-
----
-
-### 🚀 Azure DevOps & Pipelines
-
-[![Host build agent](https://img.shields.io/badge/Build%20Agent-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/host-build-agent-pipelines/)  
-[![Azure Artifacts](https://img.shields.io/badge/Azure%20Artifacts-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/manage-build-dependencies-artifacts/)  
-[![Run tests in pipeline](https://img.shields.io/badge/Quality%20Tests-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/run-tests-pipeline/)  
-[![Git workflow](https://img.shields.io/badge/GitHub%20Workflow-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/code-workflow-git-github/)  
-[![Create build pipeline](https://img.shields.io/badge/Build%20Pipeline-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/create-build-pipeline/)  
-[![Intro to Azure DevOps](https://img.shields.io/badge/Azure%20DevOps-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/introduction-azure-devops/)  
-[![Agile approach](https://img.shields.io/badge/Agile%20Development-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/agile-approach-software-development/)  
-[![Assess development process](https://img.shields.io/badge/Dev%20Process%20Assessment-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/assess-software-development-process/) – *All Completed: Aug 23, 2019*
+| Date       | Milestone |
+|------------|-----------|
+| 2024‑08‑04 | Completed Microsoft Entra ID, PowerShell, Bash, Azure Cloud Shell |
+| 2024‑01‑29 | Completed Azure Arc hybrid/multicloud monitoring & deployment |
+| 2023‑07‑19 | Completed Azure Policy & Subscription configuration |
+| 2023‑03‑15 | Completed Azure Compute Solution & Well‑Architected Framework |
+| 2022‑01‑11 | Completed JSON ARM template deployment |
+| 2019‑08‑23 | Completed Azure DevOps & Pipelines series |
 
 ---
 
-### 🧠 Architecture & Design
+## 📬 Connect With Me
+- [GitHub Profile](https://github.com/SeanSteefel)
+- [LinkedIn](https://www.linkedin.com/in/seansteefel)
+- [Microsoft Learn Profile](https://learn.microsoft.com/en-us/users/me/)
 
-[![Design Azure compute solution](https://img.shields.io/badge/Azure%20Compute%20Design-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/design-azure-compute-solution/) – *Completed: Mar 15, 2023*  
-[![Well-Architected Framework](https://img.shields.io/badge/Well--Architected%20Framework-Completed-blue)](https://learn.microsoft.com/en-us/training/modules/azure-well-architected-framework/) – *Completed: Mar 15, 2023*
+---
+
+*Last updated: {{ site.time | date: "%B %d, %Y" }}*
