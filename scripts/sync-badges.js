@@ -1,33 +1,19 @@
 #!/usr/bin/env node
 
 import axios from 'axios';
-import { load } from 'cheerio';
-import fs from 'fs';
+import fs    from 'fs';
 
 (async () => {
-  const url = 'https://learn.microsoft.com/en-us/users/sean-steefel/achievements?tab=tab-modules';
-  console.log('⏳ Fetching achievements page...');
-  const res = await axios.get(url, {
-    headers: { 'User-Agent': 'GitHub-Action' }
+  const apiUrl = 'https://learn.microsoft.com/api/learn/users/sean-steefel/achievements?%24top=100';
+  console.log('⏳ Fetching achievements via Learn API…');
+
+  const res = await axios.get(apiUrl, {
+    headers: { 'User-Agent': 'github-actions[bot]' }
   });
-  const html = res.data;
 
-  // Load the HTML into Cheerio
-  const $ = load(html);
+  const items = res.data.items || [];
+  console.log(`🔍 Found ${items.length} badges via API`);
 
-  // Grab the __NEXT_DATA__ JSON blob
-  const raw = $('#__NEXT_DATA__').html();
-  if (!raw) {
-    console.error('❌ __NEXT_DATA__ block not found');
-    process.exit(1);
-  }
-
-  // Parse and drill into the achievements array
-  const nextData = JSON.parse(raw);
-  const items = nextData.props?.pageProps?.userAchievements?.items || [];
-  console.log(`🔍 Found ${items.length} badges in NEXT_DATA`);
-
-  // Map to the shape you want in badges.json
   const badges = items.map(i => ({
     id:    i.id,
     title: i.title,
@@ -35,7 +21,6 @@ import fs from 'fs';
     img:   i.imageUrl
   }));
 
-  // Write out badges.json
   fs.writeFileSync('badges.json', JSON.stringify(badges, null, 2));
   console.log('✅ badges.json written');
 })();
