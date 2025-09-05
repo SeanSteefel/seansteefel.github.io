@@ -33,11 +33,14 @@ jobs:
       - name: Commit badges.json if changed
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          if git diff --quiet; then
-            echo "No changes to badges.json"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Stage only badges.json
+          git add badges.json
+
+          # If there's nothing new, exit zero
+          if git diff --cached --quiet; then
+            echo "✅ No changes in badges.json, skipping commit"
           else
-            git add badges.json
             git commit -m "chore: update badges.json"
             git push
           fi
