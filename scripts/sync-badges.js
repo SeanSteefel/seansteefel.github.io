@@ -40,21 +40,20 @@ import { chromium } from 'playwright';
       // ignore parse errors
     }
 
-    // 2) Fallback: scrape the DOM under the Modules (trophies) section
+    // 2) Fallback: scrape the DOM under the Modules section
     const anchors = Array.from(
       document
-        .querySelector('#trophies-section')   // the Modules tab content
-        ?.querySelectorAll('a:has(img)')     // badge cards all have an <img>
+        .querySelector('#trophies-section')
+        ?.querySelectorAll('a:has(img)')
       || []
     );
 
     return anchors.map(a => {
       const imgEl   = a.querySelector('img');
-      const titleEl = a.querySelector('span')        // many badges have a <span> with the title
-                    ?? a.querySelector('h3')        // or a heading
+      const titleEl = a.querySelector('span')
+                    ?? a.querySelector('h3')
                     ?? imgEl;
       const text    = a.textContent.trim();
-      // match "Completed on MM/DD/YYYY"
       const match   = /Completed on\s*([\d/]+)/.exec(text);
       return {
         title:  (titleEl?.textContent || imgEl?.alt || '').trim(),
@@ -64,6 +63,10 @@ import { chromium } from 'playwright';
       };
     });
   });
+
+  // Dump out exactly what was extracted
+  console.log('📦 Raw extracted badges:');
+  console.log(JSON.stringify(badges, null, 2));
 
   await browser.close();
 
