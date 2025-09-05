@@ -18,14 +18,11 @@ jobs:
           node-version: '20'
 
       - name: Install dependencies
-        run: npm ci
-
+        run: npm install --no-audit --prefer-offline
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
-
       - name: Scrape badges with Playwright
         run: node scripts/sync-badges.js
-
       - name: Commit badges.json if changed
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
