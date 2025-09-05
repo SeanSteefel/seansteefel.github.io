@@ -1,7 +1,8 @@
 // scripts/sync-badges.js
 import fs from 'fs';
 import axios from 'axios';
-import cheerio from 'cheerio';
+import { load } from 'cheerio';
+
 
 const PROFILE_URL = 'https://learn.microsoft.com/en-us/users/sean-steefel/achievements';
 
@@ -13,7 +14,7 @@ async function fetchHTML(url) {
 async function scrape() {
   console.log('⏳ Fetching achievements page...');
   const listHtml = await fetchHTML(PROFILE_URL);
-  const $ = cheerio.load(listHtml);
+  const $ = load(listHtml);
 
   // Grab every achievement link
   const links = new Set();
@@ -29,7 +30,7 @@ async function scrape() {
   for (const link of links) {
     try {
       const html = await fetchHTML(link);
-      const $$ = cheerio.load(html);
+      const $$ = load(html);
 
       // Title cleanup
       let title = $$('meta[property="og:title"]').attr('content')
