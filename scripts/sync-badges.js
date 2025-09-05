@@ -1,74 +1,54 @@
-// scripts/sync-badges-public.js
+// scripts/sync-badges-via-xhr.js
 
 import fs from 'fs/promises';
 import path from 'path';
 import { chromium } from 'playwright';
 
-const BASE_URL = process.env.ACHIEVEMENTS_URL
-  || 'https://learn.microsoft.com/users/sean-steefel/achievements';
+const USERNAME    = process.env.MSLEARN_USER || 'sean-steefel';
+const BASE_URL    = `https://learn.microsoft.com/users/${USERNAME}/achievements?tab=tab-modules`;
 const OUTPUT_FILE = path.resolve(process.cwd(), 'data', 'badges.json');
-
-async function scrapeBadges(page) {
-  // Give the page time to render everything
-  await page.waitForLoadState('networkidle');
-
-  // If the Modules tab isn’t auto-selected, click it
-  const modulesTab = page.locator('button:has-text("Modules")');
-  if (await modulesTab.count()) {
-    await modulesTab.first().click();
-  }
-
-  // Scroll down to trigger any lazy-loading
-  await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
-  await page.waitForTimeout(1000);
-
-  // Wait up to 30s for badge links to appear
-  await page.waitForSelector('a[aria-label^="Print your achievement"]', {
-    timeout: 30_000
-  });
-
-  // Extract badge data
-  return page.evaluate(() => {
-    const anchors = Array.from(
-      document.querySelectorAll('a[aria-label^="Print your achievement"]')
-    );
-    return anchors.map(a => {
-      const issuedMatch = /Completed on\s*([\d/]+)/i.exec(a.textContent || '');
-      const issued = issuedMatch?.[1] || '';
-
-      const imgEl = a.querySelector('img');
-      const href  = a.href;
-
-      // aria-label is “Print your achievement for <title>”
-      const aria   = a.getAttribute('aria-label') || '';
-      const title  = (aria.match(/for\s+(.+)$/i)?.[1] || imgEl?.alt || '')
-                      .trim();
-
-      return { title, href, img: imgEl?.src || '', issued };
-    });
-  });
-}
 
 async function main() {
   const browser = await chromium.launch({ headless: true });
   const page    = await browser.newPage();
 
-  try {
-    await page.goto(BASE_URL, { waitUntil: 'networkidle' });
+  let badges = [];
 
-    const badges = await scrapeBadges(page);
+  // 1) Catch the JSON XHR that returns your modules badges
+  page.on('response', async response => {
+    const url = response.url();
+    // adjust this pattern if Microsoft renames their endpoint
+    if (url.includes('/achievements') && response.request().resourceType() === 'xhr') {
+      try {
+        const payload = await response.json();
+        // payload shape may vary—inspect via console.log(payload)
+        badges = (payload.achievements || payload.items || []).map(item => ({
+          title : item.trophyName    || item.name        || '',
+          href  : item.links?.print  || item.printerUrl || '',
+          img   : item.badgeImageUri || item.image?.uri || '',
+          issued: item.completedDate || item.completedAt  || ''
+        }));
+      } catch (e) {
+        // non-JSON responses get filtered out
+      }
+    }
+  });
 
-    // Persist to JSON
-    await fs.mkdir(path.dirname(OUTPUT_FILE), { recursive: true });
-    await fs.writeFile(OUTPUT_FILE, JSON.stringify(badges, null, 2));
+  // 2) Drive the page to fire that XHR
+  await page.goto(BASE_URL, { waitUntil: 'networkidle' });
 
-    console.log(`✅ Scraped ${badges.length} badges → ${OUTPUT_FILE}`);
-  } catch (err) {
-    console.error('❌ Scrape failed:', err);
-    process.exit(1);
-  } finally {
-    await browser.close();
-  }
+  // 3) Give it a couple extra seconds for the badge-fetch to happen
+  await page.waitForTimeout(3_000);
+
+  await fs.mkdir(path.dirname(OUTPUT_FILE), { recursive: true });
+  await fs.writeFile(OUTPUT_FILE, JSON.stringify(badges, null, 2));
+
+  console.log(`✅ Fetched ${badges.length} badges via XHR → ${OUTPUT_FILE}`);
+
+  await browser.close();
 }
 
-main();
+main().catch(err => {
+  console.error('❌ Badge fetch failed:', err);
+  process.exit(1);
+});
