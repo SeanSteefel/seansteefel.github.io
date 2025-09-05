@@ -10,65 +10,69 @@ import { chromium } from 'playwright';
   console.log('🚀 Launching headless browser…');
   const browser = await chromium.launch();
   const page    = await browser.newPage({
-    userAgent: 'github-actions[bot]',
-  });
-
-  // Array to hold the API payload once we see it
-  let apiData = null;
-
-  // Listen for any JSON response that looks like our badges API
-  page.on('response', async (response) => {
-    try {
-      const url = response.url();
-      const ct  = response.headers()['content-type'] || '';
-      // Adjust this filter if the path is slightly different
-      if (
-        ct.includes('application/json')
-        && url.match(new RegExp(`/users/${USERNAME}/achievements`))
-      ) {
-        console.log(`🔎 Intercepted JSON from ${url}`);
-        const json = await response.json();
-        if (Array.isArray(json.items)) {
-          apiData = json.items;
-        }
-      }
-    } catch (e) {
-      // ignore JSON parse failures
-    }
+    userAgent: 'github-actions[bot]'
   });
 
   console.log(`⏳ Navigating to ${PROFILE_URL}`);
-  await page.goto(PROFILE_URL, { waitUntil: 'networkidle' });
+  await page.goto(PROFILE_URL, { waitUntil: 'domcontentloaded' });
 
-  // If the UI uses a client-side tab click to fetch modules, uncomment:
-  // console.log('🖱️ Clicking the Modules tab…');
-  // await page.click('button[role="tab"][aria-controls="tab-modules"]');
-  // await page.waitForTimeout(1000);
+  console.log('⌛ Ensuring HTML is painted and any inline JSON is present…');
+  await page.waitForTimeout(2000);
 
-  // Give the page a moment to fire its XHR
-  console.log('⌛ Waiting up to 30s for the Achievements API call…');
-  const start = Date.now();
-  while (apiData === null && Date.now() - start < 30000) {
-    await page.waitForTimeout(500);
-  }
-  if (!apiData) {
-    console.error('❌ Timed out waiting for badge data');
-    await browser.close();
+  console.log('🔎 Extracting badges via two-step strategy');
+  const badges = await page.evaluate(() => {
+    // 1) Try Next.js __NEXT_DATA__ JSON
+    try {
+      const nextDataScript = document.querySelector('#__NEXT_DATA__');
+      if (nextDataScript) {
+        const data = JSON.parse(nextDataScript.textContent);
+        const items = data.props?.pageProps?.achievements?.items;
+        if (Array.isArray(items) && items.length) {
+          return items.map(i => ({
+            title:  i.title,
+            href:   `https://learn.microsoft.com${i.relativeUrl}`,
+            img:    i.imageUrl,
+            issued: i.completedDate || i.dateCompleted || ''
+          }));
+        }
+      }
+    } catch (e) {
+      // ignore parse errors
+    }
+
+    // 2) Fallback: scrape the DOM under the Modules (trophies) section
+    const anchors = Array.from(
+      document
+        .querySelector('#trophies-section')   // the Modules tab content
+        ?.querySelectorAll('a:has(img)')     // badge cards all have an <img>
+      || []
+    );
+
+    return anchors.map(a => {
+      const imgEl   = a.querySelector('img');
+      const titleEl = a.querySelector('span')        // many badges have a <span> with the title
+                    ?? a.querySelector('h3')        // or a heading
+                    ?? imgEl;
+      const text    = a.textContent.trim();
+      // match "Completed on MM/DD/YYYY"
+      const match   = /Completed on\s*([\d/]+)/.exec(text);
+      return {
+        title:  (titleEl?.textContent || imgEl?.alt || '').trim(),
+        href:   a.href,
+        img:    imgEl?.src || '',
+        issued: match?.[1] || ''
+      };
+    });
+  });
+
+  await browser.close();
+
+  if (!Array.isArray(badges) || badges.length === 0) {
+    console.error('❌ No badges found. Unable to update badges.json.');
     process.exit(1);
   }
 
-  console.log(`✅ API returned ${apiData.length} badges`);
-
-  // Shape it exactly how you want
-  const badges = apiData.map(i => ({
-    title:  i.title,
-    href:   `https://learn.microsoft.com${i.relativeUrl}`,
-    img:    i.imageUrl,
-    issued: i.completedDate || i.dateCompleted || '',
-  }));
-
-  await browser.close();
-  console.log(`✅ Writing ${badges.length} badges to badges.json…`);
+  console.log(`✅ Extracted ${badges.length} badges, writing to badges.json…`);
   await fs.writeJson('badges.json', badges, { spaces: 2 });
   console.log('✅ badges.json written');
 })();
