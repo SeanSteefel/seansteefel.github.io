@@ -1,0 +1,35 @@
+name: Sync Microsoft Learn Badges
+
+on:
+  schedule:
+    # Runs every day at 3 AM UTC
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install axios cheerio
+
+      - name: Scrape badges and write badges.json
+        run: node scripts/sync-badges.js
+
+      - name: Commit badges.json if changed
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add badges.json
+          if ! git diff --quiet --cached; then
+            git commit -m "chore: update badges.json"
+            git push
+          fi
