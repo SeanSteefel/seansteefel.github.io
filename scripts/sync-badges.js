@@ -1,54 +1,57 @@
-// scripts/sync-badges-via-xhr.js
+#!/usr/bin/env node
 
-import fs from 'fs/promises';
-import path from 'path';
+import fs from 'fs-extra';
 import { chromium } from 'playwright';
 
-const USERNAME    = process.env.MSLEARN_USER || 'sean-steefel';
-const BASE_URL    = `https://learn.microsoft.com/users/${USERNAME}/achievements?tab=tab-modules`;
-const OUTPUT_FILE = path.resolve(process.cwd(), 'data', 'badges.json');
+(async () => {
+  const URL =
+    'https://learn.microsoft.com/en-us/users/sean-steefel/achievements?tab=tab-modules';
 
-async function main() {
-  const browser = await chromium.launch({ headless: true });
-  const page    = await browser.newPage();
-
-  let badges = [];
-
-  // 1) Catch the JSON XHR that returns your modules badges
-  page.on('response', async response => {
-    const url = response.url();
-    // adjust this pattern if Microsoft renames their endpoint
-    if (url.includes('/achievements') && response.request().resourceType() === 'xhr') {
-      try {
-        const payload = await response.json();
-        // payload shape may vary—inspect via console.log(payload)
-        badges = (payload.achievements || payload.items || []).map(item => ({
-          title : item.trophyName    || item.name        || '',
-          href  : item.links?.print  || item.printerUrl || '',
-          img   : item.badgeImageUri || item.image?.uri || '',
-          issued: item.completedDate || item.completedAt  || ''
-        }));
-      } catch (e) {
-        // non-JSON responses get filtered out
-      }
-    }
+  console.log(`🚀 Launching headless browser…`);
+  const browser = await chromium.launch();
+  const page    = await browser.newPage({
+    userAgent: 'github-actions[bot]'
   });
 
-  // 2) Drive the page to fire that XHR
-  await page.goto(BASE_URL, { waitUntil: 'networkidle' });
+  console.log(`⏳ Navigating to ${URL}`);
+  await page.goto(URL, { waitUntil: 'domcontentloaded' });
 
-  // 3) Give it a couple extra seconds for the badge-fetch to happen
-  await page.waitForTimeout(3_000);
+  console.log('⌛ Waiting for section#tabpanel-modules to appear…');
+  await page.waitForSelector('section#tabpanel-modules', { timeout: 10000 });
 
-  await fs.mkdir(path.dirname(OUTPUT_FILE), { recursive: true });
-  await fs.writeFile(OUTPUT_FILE, JSON.stringify(badges, null, 2));
+  console.log('🔎 Extracting badges from #tabpanel-modules…');
+  const badges = await page.evaluate(() => {
+    const section = document.querySelector('section#tabpanel-modules');
+    if (!section) return [];
 
-  console.log(`✅ Fetched ${badges.length} badges via XHR → ${OUTPUT_FILE}`);
+    const items = Array.from(section.querySelectorAll('li'));
+    return items.map(li => {
+      const imgEl = li.querySelector('img');
+      const linkEl = li.querySelector('a');
+
+      const title = imgEl?.alt?.trim() || '';
+      const href  = linkEl?.href || '';
+      const img   = imgEl?.src || '';
+
+      // Find the first date in MM/DD/YYYY format in the item’s text
+      const text = li.textContent || '';
+      const m    = text.match(/(\d{1,2}\/\d{1,2}\/\d{4})/);
+      const issued = m ? m[1] : '';
+
+      return { title, href, img, issued };
+    });
+  });
 
   await browser.close();
-}
 
-main().catch(err => {
-  console.error('❌ Badge fetch failed:', err);
-  process.exit(1);
-});
+  if (!Array.isArray(badges) || badges.length === 0) {
+    console.error('❌ No badges found in section#tabpanel-modules. Exiting.');
+    process.exit(1);
+  }
+
+  console.log(`✅ Found ${badges.length} badges.`);
+  console.log('📦 Raw extracted badges:', JSON.stringify(badges, null, 2));
+
+  await fs.writeJson('badges.json', badges, { spaces: 2 });
+  console.log('✅ badges.json written');
+})();
